@@ -1,55 +1,59 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Vector;
 
 import javax.swing.JPanel;
 
 public class MyPanel extends JPanel implements MouseListener {
-	// Test Variable
-	Rectangle r;
-	Circle c;
+	private Vector<Figure> _figArr;
+	private Point _firstPos;
 
 	public MyPanel() {
 		setBackground(Color.white);
 		addMouseListener(this);
-		r = new Rectangle();
-		c = new Circle();
+		_figArr = new Vector<>();
+		_firstPos = null;
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		System.out.println("Panel paint");
-		r.setGraphics(g);
-		c.setGraphics(g);
-		r.draw(100, 100, 50, 50);
-		c.draw(100, 100, 50, 50);
+		for (Figure r : _figArr) {
+			r.draw(g);
+		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("mouseClicked");
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		System.out.println("mousePressed");
-
+		_firstPos = new Point(e.getX(), e.getY());
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		System.out.println("mouseReleased");
+		Figure f;
+		if (e.isShiftDown()) {
+			f = new Circle(_firstPos, new Point(e.getX(), e.getY()));
+		} else {
+			f = new Rectangle(_firstPos, new Point(e.getX(), e.getY()));
+		}
+		_figArr.add(f);
+		repaint();
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		System.out.println("mouseEntered");
+		// System.out.println("mouseEntered");
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		System.out.println("mouseExited");
+		// System.out.println("mouseExited");
 	}
 }

@@ -1,49 +1,62 @@
 import java.awt.Graphics;
+import java.awt.Point;
 
 public abstract class Figure {
-	private int _x, _y, _width, _height;
-	private Graphics _g;
+	private Point _position, _size;
+
+	public Figure(Point p, Point s) {
+		_position = new Point(Math.min(p.x, s.x), Math.min(p.y, s.y));
+		_size = new Point(Math.abs(s.x - p.x), Math.abs(s.y - p.y));
+	}
 
 	public int getHeight() {
-		return _height;
+		return _size.y;
 	}
 
 	public void setHeight(int _height) {
-		this._height = _height;
+		_size.y = _height;
 	}
 
 	public int getWidth() {
-		return _width;
+		return _size.x;
 	}
 
 	public void setWidth(int _width) {
-		this._width = _width;
+		_size.x = _width;
 	}
 
 	public int getY() {
-		return _y;
+		return _position.y;
 	}
 
 	public void setY(int _y) {
-		this._y = _y;
+		_position.y = _y;
 	}
 
 	public int getX() {
-		return _x;
+		return _position.x;
 	}
 
 	public void setX(int _x) {
-		this._x = _x;
+		_position.x = _x;
 	}
 
-	public Graphics getGraphics() {
-		return _g;
+	public Point getPosition() {
+		return _position;
 	}
 
-	public void setGraphics(Graphics _g) {
-		this._g = _g;
+	public void setPosition(Point p) {
+		_position = p;
 	}
 
-	public abstract void draw(int x, int y, int w, int h);
+	public Point getSize() {
+		return _size;
+	}
 
+	public void setSize(Point p) {
+		_size = p;
+	}
+
+	// Override 함수
+	public abstract void draw(Graphics g);
 }
