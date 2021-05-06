@@ -8,8 +8,6 @@ public class MyFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 300);
 		setVisible(true);
-		
-		setContentPane(new MyPanel());
 	}
 
 }
