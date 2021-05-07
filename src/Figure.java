@@ -5,6 +5,7 @@ public abstract class Figure {
 	private Point _position, _size;
 
 	public Figure(Point p, Point s) {
+		//여러가지 방향으로 그림을 그리기 위해서
 		_position = new Point(Math.min(p.x, s.x), Math.min(p.y, s.y));
 		_size = new Point(Math.abs(s.x - p.x), Math.abs(s.y - p.y));
 	}
@@ -57,6 +58,6 @@ public abstract class Figure {
 		_size = p;
 	}
 
-	// Override 함수
+	// 가상 함수
 	public abstract void draw(Graphics g);
 }

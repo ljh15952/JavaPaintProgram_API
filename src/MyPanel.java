@@ -21,6 +21,7 @@ public class MyPanel extends JPanel implements MouseListener {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		//다형성을 활용해서 여러가지 도형이 담긴 배열을 그려주기만 해도 OK
 		for (Figure r : _figArr) {
 			r.draw(g);
 		}
