@@ -24,5 +24,9 @@ public class MyPanel extends JPanel {
 		for (Figure r : _frame.getFigureList()) {
 			r.draw(g);
 		}
+		//버튼 배열 그리기
+		for (MyButton r : _frame.getButtonList()) {
+			r.draw(g);
+		}
 	}
 }
