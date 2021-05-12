@@ -6,8 +6,8 @@ public abstract class Figure {
 
 	public Figure(Point p, Point s) {
 		//여러가지 방향으로 그림을 그리기 위해서
-		_position = new Point(Math.min(p.x, s.x), Math.min(p.y, s.y));
-		_size = new Point(Math.abs(s.x - p.x), Math.abs(s.y - p.y));
+		_position = p;
+		_size = s;
 	}
 
 	public int getHeight() {

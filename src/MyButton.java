@@ -3,16 +3,19 @@ import java.awt.Point;
 
 public class MyButton {
 	private String _name;
-	Point _position;
-	Point _size;
-
+	private Point _position;
+	private Point _size;
+	//Composition Pattern
+	private Rectangle _rect;
 	public MyButton(String n) {
 		_name = n;
+		_rect = null;
 	}
 
 	public void setBounds(int i, int j, int k, int l) {
 		_position = new Point(i, j);
 		_size = new Point(k, l);
+		_rect = new Rectangle(_position, _size);
 	}
 
 	public void draw(Graphics g) {
@@ -20,11 +23,11 @@ public class MyButton {
 	}
 
 	public Boolean contains(Point p) {
-		if (_position.x <= p.x && 
-			_position.y <= p.y &&
-			_position.x + _size.x >= p.x &&
-			_position.y + _size.y >= p.y) {
-			return true;
+		if (_rect.getX() <= p.x && 
+			_rect.getY() <= p.y &&
+			_rect.getWidth() + _rect.getX() >= p.x &&
+			_rect.getHeight() + _rect.getY() >= p.y) {
+				return true;
 		}
 		return false;
 	}

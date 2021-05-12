@@ -39,10 +39,14 @@ public class MyMouseListener implements MouseListener {
 		}
 
 		Figure f;
+		Point _lastPos = e.getPoint();
+		Point _realPos = new Point(Math.min(_firstPos.x, _lastPos.x), Math.min(_firstPos.y, _lastPos.y));
+		Point _realSize = new Point(Math.abs(_firstPos.x - _lastPos.x), Math.abs(_firstPos.y - _lastPos.y));
+
 		if (e.isShiftDown()) {
-			f = new Circle(_firstPos, new Point(e.getX(), e.getY()));
+			f = new Circle(_realPos, _realSize);
 		} else {
-			f = new Rectangle(_firstPos, new Point(e.getX(), e.getY()));
+			f = new Rectangle(_realPos, _realSize);
 		}
 		_frame.addFigureList(f);
 	}
