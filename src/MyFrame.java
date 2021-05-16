@@ -1,4 +1,6 @@
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Vector;
 
@@ -9,13 +11,12 @@ public class MyFrame extends JFrame {
 	private Vector<Figure> _figArr;
 	private Vector<MyButton> _buttonArr;
 	private MyButton _clickedButton = null;
+	private String _drawType = "";
 
 	public MyFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 300);
 		setContentPane(new MyPanel(this));
-		// setVisible 나중에 안해주면 프로그램 시작했을 때 Panel의 paint가 호출 안될때도 있음
-		setVisible(true);
 	}
 
 	public void setClickedButton(Point p) {
@@ -67,29 +68,51 @@ public class MyFrame extends JFrame {
 		_figArr = new Vector<>();
 		_buttonArr = new Vector<>();
 		// 버튼 생성
-		MyButton apple = new MyButton("apple");
-		MyButton banana = new MyButton("banana");
-		apple.setBounds(10, 60, 70, 25); // 위치와 크기를 결정한다. x=10 y=60 width=70, height=25 이다.
-		banana.setBounds(90, 60, 70, 25);
-		this.add(apple);
-		this.add(banana);
+		MyButton Rect = new MyButton("사각형");
+		MyButton Oval = new MyButton("타원");
+		MyButton Line = new MyButton("선분");
+		this.add(Rect);
+		this.add(Oval);
+		this.add(Line);
+		Rect.setBounds(10, 60, 70, 25); // 위치와 크기를 결정한다. x=10 y=60 width=70, height=25 이다.
+		Oval.setBounds(90, 60, 70, 25);
+		Line.setBounds(170, 60, 70, 25);
+		MyRealActionListener btnListener = new MyRealActionListener(this);
+		Rect.addListener(btnListener);
+		Oval.addListener(btnListener);
+		Line.addListener(btnListener);
 	}
 
 	public void makeFigure(boolean isshiftDown, Point _firstPos, Point e) {
 		// 버튼을 클릭했다면 그림X
 		if (_clickedButton != null)
 			return;
-
-		Figure f;
+		if (_drawType == "")
+			return;
+		Figure f = null;
 		Point _lastPos = e;
 		Point _realPos = new Point(Math.min(_firstPos.x, _lastPos.x), Math.min(_firstPos.y, _lastPos.y));
 		Point _realSize = new Point(Math.abs(_firstPos.x - _lastPos.x), Math.abs(_firstPos.y - _lastPos.y));
 
-		if (isshiftDown) {
-			f = new Circle(_realPos, _realSize);
-		} else {
+		if (_drawType == "사각형") {
 			f = new Rectangle(_realPos, _realSize);
+		} else if (_drawType == "타원") {
+			f = new Circle(_realPos, _realSize);
+		} else if (_drawType == "선분") {
+			f = new Line(_firstPos, _lastPos);
 		}
 		addFigureList(f);
 	}
+
+	public void setFigureType(String type) {
+		_drawType = type;
+	}
+	
+//	@Override
+//	public void paint(Graphics g) {
+//		super.paint(g);
+//		for(MyButton b : _buttonArr) {
+//			b.draw(g);
+//		}
+//	}
 }
