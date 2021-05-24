@@ -9,17 +9,7 @@ public class MyEvent {
 		_point = position;
 		_btn = b;
 	}
-	
-//	public String getSource() {
-//		return _str;
-//	}
-//	public Point getSource() {
-//		return _point;
-//	}
 	public MyButton getSource() {
 		return _btn;
-	}
-	public String getSourceStr() {
-		return _str;
 	}
 }

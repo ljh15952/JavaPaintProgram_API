@@ -11,22 +11,18 @@ public class MyButton {
 	private String _name;
 	private Point _position;
 	private Point _size;
-	// Composition Pattern
-	private Rectangle _rect;
 
 	// Observer Pattern
-	private Vector<MyRealActionListener> _myListenerList;
+	private Vector<MyActionListener> _myListenerList;
 
 	public MyButton(String n) {
 		_name = n;
-		_rect = null;
 		_myListenerList = new Vector<>();
 	}
 
 	public void setBounds(int i, int j, int k, int l) {
 		_position = new Point(i, j);
 		_size = new Point(k, l);
-		_rect = new Rectangle(_position, _size);
 	}
 
 	public void draw(Graphics g) {
@@ -35,22 +31,20 @@ public class MyButton {
 	}
 
 	public Boolean contains(Point p) {
-		if (_rect.getX() <= p.x && _rect.getY() <= p.y && _rect.getWidth() + _rect.getX() >= p.x
-				&& _rect.getHeight() + _rect.getY() >= p.y) {
+		if (_position.x <= p.x && _position.y <= p.y && _size.x + _position.x >= p.x && _size.y + _position.y >= p.y) {
 			return true;
 		}
 		return false;
 	}
 
-	public void ClickEvent() {
-		//리스너 활용
-		for(MyRealActionListener it : _myListenerList) {
-			it.actionPerformed(new MyEvent(_name,_position,this));
-		}
+	public void addListener(MyActionListener btnListener) {
+		_myListenerList.add(btnListener);
 	}
 
-	public void addListener(MyRealActionListener btnListener) {
-		btnListener.setButton(this);
-		_myListenerList.add(btnListener);
+	public void ClickEvent() {
+		// 리스너 활용
+		for (MyActionListener it : _myListenerList) {
+			it.actionPerformed(new MyEvent(_name, _position, this));
+		}
 	}
 }

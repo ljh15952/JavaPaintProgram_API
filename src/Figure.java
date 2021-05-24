@@ -2,13 +2,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 public abstract class Figure {
-	private Point _position, _size;
-
-	public Figure(Point p, Point s) {
-		//여러가지 방향으로 그림을 그리기 위해서
-		_position = p;
-		_size = s;
-	}
+	protected Point _position, _size;
 
 	public int getHeight() {
 		return _size.y;

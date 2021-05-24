@@ -8,3 +8,8 @@ public class Main {
 	}
 }
 
+/*
+TODO
+1. Change State pattern
+2. Add Toolbar to add buttons
+*/

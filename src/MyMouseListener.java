@@ -6,7 +6,6 @@ public class MyMouseListener implements MouseListener {
 	private Point _firstPos;
 	private MyFrame _frame;
 
-
 	public MyMouseListener(MyFrame f) {
 		_frame = f;
 		_firstPos = null;
@@ -14,20 +13,28 @@ public class MyMouseListener implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		_firstPos = new Point(e.getX(), e.getY());
-		_frame.setClickedButton(_firstPos);
+	}
+
+	Boolean isButtonClicked(Point p) {
+		for (MyButton it : _frame.getButtonList()) {
+			if (it.contains(p)) {
+				it.ClickEvent();
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		//순서 중요
-		_frame.makeFigure(e.isShiftDown(),_firstPos,e.getPoint());
-		_frame.isButtonUp(e.getPoint());
+		if (!isButtonClicked(e.getPoint()))
+			_frame.do_something(_firstPos, e.getPoint());
 	}
 
 	@Override
