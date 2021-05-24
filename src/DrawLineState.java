@@ -1,4 +1,5 @@
 import java.awt.Point;
+
 public class DrawLineState extends DrawState implements StatePattern {
 
 	public DrawLineState(MyFrame f) {
@@ -10,7 +11,6 @@ public class DrawLineState extends DrawState implements StatePattern {
 		Figure f = new Line();
 		f.setPosition(p1);
 		f.setSize(new Point((p2.x - p1.x), (p2.y - p1.y)));
-		System.out.println("qwe");
 		_frame.addFigure(f);
 	}
 

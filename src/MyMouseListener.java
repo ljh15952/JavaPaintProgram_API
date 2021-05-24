@@ -21,14 +21,14 @@ public class MyMouseListener implements MouseListener {
 		_firstPos = new Point(e.getX(), e.getY());
 	}
 
-	Boolean isButtonClicked(Point p) {
-		for (MyButton it : _frame.getButtonList()) {
-			if (it.contains(p)) {
-				it.ClickEvent();
-				return true;
-			}
+	private Boolean isButtonClicked(Point p) {
+		MyButton it = _frame.getToolbar().getClickedButton(p);
+		if (it == null)
+			return false;
+		else {
+			it.ClickEvent();
+			return true;
 		}
-		return false;
 	}
 
 	@Override

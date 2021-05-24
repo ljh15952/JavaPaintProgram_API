@@ -12,4 +12,7 @@ public class MyEvent {
 	public MyButton getSource() {
 		return _btn;
 	}
+	public String getSourceStr() {
+		return _str;
+	}
 }
